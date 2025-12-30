@@ -4,8 +4,8 @@
 To verify whether a given image is original or has been modified.
 
 ## Files Used
-- Original-sample image
-- Edited-sample image
+- Original image
+- Edited image
 
 ## Method
 The images were visually examined and compared using forensic tools to check for any signs of manipulation or editing.
