@@ -1,26 +1,33 @@
 # Case 3: Email Header Phishing Detection
 
 **Scenario**  
-Analysis of a suspicious email header to identify phishing indicators and trace the real sender.
+Analysis of a suspicious email claiming to be from SBI, requesting account verification.
 
-**Sample Email Header Used**  
-Reconstructed from common public phishing examples (synthetic for demonstration – no real email).
+**Email Details**  
+- From: communications.sbi.co.in (spoofed)  
+- Subject: Explore Smarter Payments & Easier Withdrawals With Yono SBI  
+- Received: 18 August 2025
 
 **Tools Used**  
-- Manual header parsing  
-- MX Toolbox (SPF/DKIM check)  
-- WhoIs & IP geolocation lookup
+- Gmail "Show Original" for header extraction  
+- MX Toolbox Email Header Analyzer
 
 **Key Findings**  
-- "From" address spoofed: Display name "SBI Bank" but sender domain @random-domain.xyz  
-- X-Originating-IP: IP from Nigeria (not official SBI server range)  
-- SPF check: Fail (sender not authorized)  
-- DKIM signature: Missing  
-- Reply-to address different from From → redirect replies to attacker  
-- Embedded link pointed to phishing site (hxxp://sbi-login[.]xyz)
+- SPF: Fail  
+- DKIM: Fail  
+- DMARC: Fail  
+- Received From IP: 175.158.69.24 (not official SBI server range)  
+- Return-Path mismatched with From address  
+- Sending IP in Spamhaus blacklist  
+- IP Geolocation: Eastern Europe (not India/SBI official)  
+- All authentication checks failed → high phishing indicator
 
 **Conclusion**  
-Even sophisticated phishing emails can be detected quickly by examining headers for spoofing, authentication failures, and mismatched domains/IPs. Always verify before clicking links or sharing OTP.
+The analyzed mail is fake/phishing. It did not originate from SBI servers and failed all authentication tests (SPF, DKIM, DMARC). This confirms the mail is a spoofed spam message and should not be trusted.
+
+**Screenshots**  
+- See /screenshots folder for:  
+  Gmail Show Original, authentication results, header fields, MX Toolbox analysis
 
 **Disclaimer**  
-This is a sample analysis using reconstructed public phishing header data for portfolio demonstration only. No real client email or PII involved.
+This is a sample analysis of a real suspicious email for portfolio demonstration only. No sensitive PII shared; headers anonymized where needed.
